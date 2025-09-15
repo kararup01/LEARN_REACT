@@ -1,4 +1,4 @@
-const TodoItem = ({todoName, todoDate}) => {
+const TodoItem = ({todoName, todoDate, onDeleteClick}) => {
   return (
     <>
       <div class="container">
@@ -6,7 +6,11 @@ const TodoItem = ({todoName, todoDate}) => {
           <div class="col-sm-6">{todoName}</div>
           <div class="col-sm-4">{todoDate}</div>
           <div class="col-sm-2">
-            <button type="button" class="btn btn-danger kar-button">Delete</button>
+            <button 
+              type="button" 
+              class="btn btn-danger kar-button" 
+              onClick={()=>onDeleteClick(todoName)}
+            >Delete</button>
           </div>
         </div>
       </div>
