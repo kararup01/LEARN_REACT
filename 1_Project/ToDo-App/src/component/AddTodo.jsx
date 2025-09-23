@@ -1,9 +1,10 @@
 import { useState } from "react";
+import { MdAddBox } from "react-icons/md";
 
 function AddTodo ({onNewItem}) {
 
-  const [todoName, setTodoName] = useState();
-  const [deuDate, setdeuDate] = useState();
+  const [todoName, setTodoName] = useState('');
+  const [deuDate, setdeuDate] = useState('');
 
   const handleAddTodoName = (e) =>{
     // console.log(e.target.value);  
@@ -14,24 +15,22 @@ function AddTodo ({onNewItem}) {
     setdeuDate(e.target.value);
   }
 
-  const handleClickAddBtn = () =>{
-    if(todoName.length>0 && deuDate.length>0){   
+  const handleClickAddBtn = (event) =>{
+      event.preventDefault();
       onNewItem(todoName, deuDate);
       setTodoName('');
-      setdeuDate(''); 
-    }    
+      setdeuDate('');     
   }
 
   return <>
     <div class="container" style={{'textAlign':"left"}}>
-      <div class="row kar-row">
+      <form class="row kar-row" onSubmit={handleClickAddBtn} >
         <div class="col-sm-6"> 
           <input 
             type="text" 
             value={todoName} 
             placeholder="Enter Todo Here" 
             onChange={handleAddTodoName}
-            required
           />
         </div>
         <div class="col-sm-4">
@@ -39,13 +38,16 @@ function AddTodo ({onNewItem}) {
             type="date" 
             value={deuDate} 
             onChange={handleAddDeuDate}
-            required
           />
         </div>
         <div class="col-sm-2">
-          <button type="button" class="btn btn-success kar-button" onClick={handleClickAddBtn}>Add</button>
+          <button 
+            class="btn btn-success kar-button" 
+          >
+            <MdAddBox />
+          </button>
         </div>
-      </div>
+      </form>
     </div>
   </>
 }
