@@ -1,25 +1,19 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { MdAddBox } from "react-icons/md";
 
 function AddTodo ({onNewItem}) {
 
-  const [todoName, setTodoName] = useState('');
-  const [deuDate, setdeuDate] = useState('');
-
-  const handleAddTodoName = (e) =>{
-    // console.log(e.target.value);  
-    setTodoName(e.target.value);
-  }
-  const handleAddDeuDate = (e) =>{
-    // console.log(e.target.value);  
-    setdeuDate(e.target.value);
-  }
+  const todoNameElement = useRef();
+  const deuDateElement = useRef();
 
   const handleClickAddBtn = (event) =>{
-      event.preventDefault();
-      onNewItem(todoName, deuDate);
-      setTodoName('');
-      setdeuDate('');     
+    event.preventDefault();
+      
+    let todoName = todoNameElement.current.value;
+    let deuDate = deuDateElement.current.value;
+    todoNameElement.current.value = '';
+    deuDateElement.current.value = '';
+    onNewItem(todoName, deuDate);
   }
 
   return <>
@@ -28,16 +22,16 @@ function AddTodo ({onNewItem}) {
         <div class="col-sm-6"> 
           <input 
             type="text" 
-            value={todoName} 
             placeholder="Enter Todo Here" 
-            onChange={handleAddTodoName}
+            ref={todoNameElement}
+            required
           />
         </div>
         <div class="col-sm-4">
           <input 
             type="date" 
-            value={deuDate} 
-            onChange={handleAddDeuDate}
+            ref={deuDateElement}
+            required
           />
         </div>
         <div class="col-sm-2">
