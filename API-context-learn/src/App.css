@@ -1,0 +1,15 @@
+input {
+  width: 100%;
+}
+
+.item-container {
+  text-align: left;
+}
+
+.kar-button {
+  min-width: 80px;
+}
+
+.kar-row {
+  margin: 10px 5px;
+}
