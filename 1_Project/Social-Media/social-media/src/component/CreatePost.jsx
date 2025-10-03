@@ -1,21 +1,52 @@
+import { useContext, useRef } from "react";
+import { PostListContext } from "../store/post-list-store";
+
 const CreatePost = () =>{
+
+  const {addPostList} = useContext(PostListContext);
+
+  const titleElement = useRef();
+  const bodyTextElement = useRef();
+  const reactionsElement = useRef();
+  const tagsElement = useRef();
+
+  const handleClickAddBtn = (event) =>{
+    event.preventDefault();
+
+    let title = titleElement.current.value;
+    let bodyText = bodyTextElement.current.value;     
+    let reactions = reactionsElement.current.value;     
+    let tags = tagsElement.current.value.split(" ");  
+    let uniqId = 'id' + (new Date()).getTime();
+
+    titleElement.current.value = '';
+    bodyTextElement.current.value = '';
+    reactionsElement.current.value = '';
+    tagsElement.current.value = '';
+    addPostList(title, bodyText, reactions, tags, uniqId);
+
+  };
+
   return(
     <>
-      <form>
-        <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label">Email address</label>
-          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"/>
-          <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+      <form onSubmit={handleClickAddBtn} className="create-post">
+        <div className="mb-3">
+          <label htmlFor="exampleInputTitle" className="form-label">Title</label>
+          <input ref={titleElement} type="text" className="form-control" id="exampleInputTitle" placeholder="Enter Title" required/>
         </div>
-        <div class="mb-3">
-          <label for="exampleInputPassword1" class="form-label">Password</label>
-          <input type="password" class="form-control" id="exampleInputPassword1"/>
+        <div className="mb-3">
+          <label htmlFor="exampleInputBodyText" className="form-label">Content</label>
+          <textarea rows={5} ref={bodyTextElement} type="text" className="form-control" id="exampleInputBodyText" placeholder="Enter Body Text" required/>
         </div>
-        <div class="mb-3 form-check">
-          <input type="checkbox" class="form-check-input" id="exampleCheck1"/>
-          <label class="form-check-label" for="exampleCheck1">Check me out</label>
+        <div className="mb-3">
+          <label htmlFor="exampleInputReactions" className="form-label">Reactions</label>
+          <input ref={reactionsElement} type="number" className="form-control" id="exampleInputReactions" required/>
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <div className="mb-3">
+          <label htmlFor="exampleInputTags" className="form-label">Tags</label>
+          <input ref={tagsElement} type="text" className="form-control" id="exampleInputTags" placeholder="Enter tag using space" required/>
+        </div>
+        <button className="btn btn-primary">Submit</button>
       </form>
     </>
   )
