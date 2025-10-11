@@ -1,0 +1,33 @@
+.app-container {
+  display: flex;
+}
+
+.content {
+  width: 100%;
+}
+
+.sidebar {
+  min-height: 100vh;
+}
+
+.post-card {
+  margin: 40px 60px;
+}
+
+.btn-margin {
+  margin: 2px 4px;
+}
+
+.create-post {
+  width: 70%;
+  margin: 30px auto;
+}
+
+.massage {
+  text-align: center;
+  margin-top: 12rem;
+}
+
+.loder {
+  margin-top: 10rem;
+}
